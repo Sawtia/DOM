@@ -1,40 +1,41 @@
 import json
 
 
+def load_menu():
+    with open('menu.json', 'r') as f:
+        menu = json.load(f)
+        return menu
+
+
+def save_menu(menu):
+    with open('menu.json', 'w') as f:
+        return json.dump(menu, f)
+
 
 class Pizzeria:
 
     def __init__(self, menu):
         self.menu = menu
 
-    def load_menu(self):
-        with open('menu.json', 'r') as f:
-            json.load(f)
-            return json.load(f)
-
-    def save_menu(self):
-        with open('menu.json', 'w') as f:
-            return json.dump(menu, f)
-
     def add_pizza(self, price):
-        Pizzeria.load_menu(self)
+        menu = load_menu()
         if self in menu.keys():
             print('already there is')
         else:
             menu[self] = price
-        return Pizzeria.save_menu(menu)
+        return save_menu(menu)
 
     def remove_pizza(self):
-        Pizzeria.load_menu(self)
+        menu = load_menu()
         if self in menu.keys():
             print('delete')
             del menu[self]
         else:
             print('no pizza')
-        return Pizzeria.save_menu(menu)
+        return save_menu(menu)
 
     def order_pizza(self):
-        Pizzeria.load_menu(self)
+        menu = load_menu()
         order = []
         cost = 0
         while True:
@@ -53,8 +54,6 @@ class Pizzeria:
         return (order, cost)
 
 
-
-
 if __name__ == "__main__":
     while True:
         q3 = input('continue?')
@@ -65,7 +64,7 @@ if __name__ == "__main__":
                 if q2 == 'add':
                     name_pizza = input('name pizza:')
                     price_pizza = int(input('price:'))
-                    Pizzeria.add_pizza(name_pizza, price_pizza)
+                    Pizzeria.add_pizza(name_pizza, price=price_pizza)
                 elif q2 == 'delete':
                     name_pizza = input('for deleting:')
                     Pizzeria.remove_pizza(name_pizza)
