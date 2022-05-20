@@ -5,10 +5,8 @@ import menu as menu
 
 class Pizzeria:
 
-    def __init__(self, name, price):
+    def __init__(self):
         self.menu = None
-        self.name = name
-        self.price = price
 
     def load_menu(self):
         with open('menu.json', 'r') as f:
@@ -55,7 +53,7 @@ class Pizzeria:
                         print(cost)
             return order, cost
 
-pizzeria = Pizzeria('pizza3', 435)
+pizzeria = Pizzeria()
 
 
 
